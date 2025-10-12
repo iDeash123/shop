@@ -1,9 +1,17 @@
 [
     {
         "model": "goods.categories",
+        "pk": 1,
+        "fields": {
+            "name": "Всі товари 🛒",
+            "slug": "vsi-tovari"
+        }
+    },
+    {
+        "model": "goods.categories",
         "pk": 10,
         "fields": {
-            "name": "Пелетні грилі",
+            "name": "Пелетні грилі 🪵",
             "slug": "peletni-grili"
         }
     },
@@ -11,7 +19,7 @@
         "model": "goods.categories",
         "pk": 11,
         "fields": {
-            "name": "Газові грилі",
+            "name": "Газові грилі 🔩",
             "slug": "gazovi-grili"
         }
     },
@@ -19,7 +27,7 @@
         "model": "goods.categories",
         "pk": 12,
         "fields": {
-            "name": "Електричні грилі",
+            "name": "Електричні грилі 🔌",
             "slug": "elektrichni-grili"
         }
     },
@@ -27,7 +35,7 @@
         "model": "goods.categories",
         "pk": 13,
         "fields": {
-            "name": "Вугільні грилі",
+            "name": "Вугільні грилі 🔥",
             "slug": "vugilni-grili"
         }
     }

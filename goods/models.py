@@ -35,7 +35,7 @@ class Products(models.Model):
         null=True,
         verbose_name="URL",
     )
-    descripton = models.TextField(blank=True, null=True, verbose_name="Description")
+    description = models.TextField(blank=True, null=True, verbose_name="Description")
     image = models.ImageField(
         upload_to="goods_images", blank=True, null=True, verbose_name="Image"
     )
@@ -58,3 +58,12 @@ class Products(models.Model):
 
     def __str__(self):
         return f"{self.name} Quantity {self.quantity}"
+
+    def display_id(self):
+        return f"{self.id:05}"
+
+    def sell_price(self):
+        if self.discount:
+            return round(self.price - self.price * self.discount / 100, 2)
+
+        return self.price
