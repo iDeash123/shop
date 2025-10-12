@@ -33,6 +33,7 @@ urlpatterns = [
     path("", include(main.urls, namespace="main")),
     path("catalog/", include(goods.urls, namespace="catalog")),
 ]
-if DEBUG:
+
+if settings.DEBUG:
     urlpatterns += debug_toolbar_urls()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
