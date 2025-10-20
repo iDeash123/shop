@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "name": "Всі товари 🛒",
-            "slug": "vsi-tovari"
+            "slug": "all"
         }
     },
     {
@@ -37,6 +37,14 @@
         "fields": {
             "name": "Вугільні грилі 🔥",
             "slug": "vugilni-grili"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 14,
+        "fields": {
+            "name": "Аерогрилі 🌪️",
+            "slug": "aerogrili"
         }
     }
 ]
