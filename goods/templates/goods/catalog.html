@@ -77,13 +77,27 @@
                                         </p>
                                     </a>
                                     <p class="card-text">
-                                            {% autoescape off %}
-                                                {% if product.bodyline %}
-                                                {{ product.bodyline|truncatechars:125 }}
-                                                {% else %}
-                                                {{ product.description|truncatechars:75 }}
-                                                {% endif %}
-                                            {% endautoescape %}
+                                        {% autoescape off %}
+                                            
+                                            {% if product.bodyline %}
+                                                {% with product.bodyline|truncatechars:150 as text_to_display %}
+                                                    {{ text_to_display }}
+                                                    {# Заполняем пустое пространство, если текст очень короткий #}
+                                                    {% if text_to_display|length < 50 %}
+                                                        <br>&nbsp;<br>&nbsp;<br>&nbsp;
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                {% with product.description|truncatechars:100 as text_to_display %}
+                                                    {{ text_to_display }}
+                                                    {# Заполняем пустое пространство, если текст очень короткий #}
+                                                    {% if text_to_display|length < 50 %}
+                                                        <br>&nbsp;<br>&nbsp;<br>&nbsp;
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% endif %}
+                                            
+                                        {% endautoescape %}
                                     </p>
                                     <p class="product_id">id: {{ product.display_id }}</p>
                                     <div class="d-flex justify-content-between">
