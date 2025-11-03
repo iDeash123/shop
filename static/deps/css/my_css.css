@@ -40,3 +40,7 @@ body {
 .main-content-offset {
   padding-top: 70px;
 }
+
+.error-message-offset {
+  margin-top: 70px; /* Вы можете настроить это значение (например, 100px, 150px и т.д.) */
+}
