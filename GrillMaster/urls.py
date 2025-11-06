@@ -18,12 +18,14 @@ Including another URLconf
 from distutils.log import DEBUG
 from django.contrib import admin
 from django.urls import include, path
+import carts
 import goods
 import goods.urls
 from main import views
 import main
 import main.urls
 import users.urls
+import carts.urls
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 from django.conf import settings
@@ -34,6 +36,7 @@ urlpatterns = [
     path("", include(main.urls, namespace="main")),
     path("catalog/", include(goods.urls, namespace="catalog")),
     path("user/", include(users.urls, namespace="user")),
+    path("cart/", include(carts.urls, namespace="cart")),
 ]
 
 if settings.DEBUG:
