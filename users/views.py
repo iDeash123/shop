@@ -2,7 +2,7 @@ import re
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template import context
 from django.urls import reverse
 
@@ -19,7 +19,9 @@ def login(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, f"Ви успішно увійшли як {username}")
-                if request.POST.get("next", None):
+
+                redirect_page = request.POST.get("next", None)
+                if redirect_page and redirect_page != reverse("user:logout"):
                     return HttpResponseRedirect(request.POST.get("next"))
                 return HttpResponseRedirect(reverse("main:index"))
     else:
