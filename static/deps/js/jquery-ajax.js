@@ -89,15 +89,12 @@ $(document).ready(function () {
         });
     });
 
-    // --- Закомментированная логика удаления товара из корзины ---
-
-    /*
     // Ловим собыитие клика по кнопке удалить товар из корзины
     $(document).on("click", ".remove-from-cart", function (e) {
         // Блокируем его базовое действие
         e.preventDefault();
 
-        // Берем текущее значение счетчика
+        // Берем текущее значение счетчика товаров в корзине (предполагая, что goodsInCartCount - это jQuery-объект)
         var cartCount = parseInt(goodsInCartCount.text() || 0);
 
         // Получаем id корзины из атрибута data-cart-id
@@ -111,10 +108,12 @@ $(document).ready(function () {
             url: remove_from_cart,
             data: {
                 cart_id: cart_id,
+                // Получаем CSRF-токен для Django
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // Сообщение
+                // Сообщение об успешном удалении
+                // Предполагая, что successMessage - это jQuery-объект для отображения сообщений
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
                 // Через 7сек убираем сообщение
@@ -123,6 +122,7 @@ $(document).ready(function () {
                 }, 7000);
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
+                // data.quantity_deleted - количество единиц, которое было удалено
                 cartCount -= data.quantity_deleted;
                 goodsInCartCount.text(cartCount);
 
@@ -133,26 +133,29 @@ $(document).ready(function () {
             error: function (data) {
                 console.log("Ошибка при удалении товара из корзины");
                 // Добавьте логику отображения ошибки, если нужно
+                // Например, вывод сообщения об ошибке пользователю
             },
         });
     });
-    */
 
-    // --- Закомментированная логика изменения количества товара в корзине ---
+    // --- Логика изменения количества товара в корзине ---
 
-    /*
     // Функция для обновления корзины (изменение количества)
     function updateCart(cartID, quantity, change, url) {
         $.ajax({
             type: "POST",
             url: url,
             data: {
+                // ID записи корзины
                 cart_id: cartID,
+                // Новое количество товара
                 quantity: quantity,
+                // CSRF-токен для Django
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // Сообщение
+                // Сообщение об успешном изменении
+                // Предполагая, что successMessage - это jQuery-объект для отображения сообщений
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
                 // Через 7сек убираем сообщение
@@ -160,12 +163,13 @@ $(document).ready(function () {
                     successMessage.fadeOut(400);
                 }, 7000);
 
-                // Изменяем количество товаров в корзине
+                // Изменяем общее количество товаров в корзине (в шапке сайта)
+                // 'change' здесь - это 1 или -1, отражающее изменение количества
                 var cartCount = parseInt(goodsInCartCount.text() || 0);
                 cartCount += change;
                 goodsInCartCount.text(cartCount);
 
-                // Меняем содержимое корзины
+                // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
             },
@@ -176,41 +180,43 @@ $(document).ready(function () {
         });
     }
 
-    // Обработчик события для уменьшения значения
+    // Обработчик события для уменьшения значения (кнопка "-")
     $(document).on("click", ".decrement", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
         var url = $(this).data("cart-change-url");
         // Берем id корзины из атрибута data-cart-id
         var cartID = $(this).data("cart-id");
-        // Ищем ближайшеий input с количеством
+        // Ищем ближайший input с количеством
         var $input = $(this).closest('.input-group').find('.number');
-        // Берем значение количества товара
+        // Берем текущее значение количества товара
         var currentValue = parseInt($input.val());
+
         // Если количества больше одного, то только тогда делаем -1
         if (currentValue > 1) {
+            // Уменьшаем значение в input'е
             $input.val(currentValue - 1);
-            // Запускаем функцию
+            // Запускаем функцию AJAX-обновления: новое количество, изменение = -1
             updateCart(cartID, currentValue - 1, -1, url);
         }
     });
 
-    // Обработчик события для увеличения значения
+    // Обработчик события для увеличения значения (кнопка "+")
     $(document).on("click", ".increment", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
         var url = $(this).data("cart-change-url");
         // Берем id корзины из атрибута data-cart-id
         var cartID = $(this).data("cart-id");
-        // Ищем ближайшеий input с количеством
+        // Ищем ближайший input с количеством
         var $input = $(this).closest('.input-group').find('.number');
-        // Берем значение количества товара
+        // Берем текущее значение количества товара
         var currentValue = parseInt($input.val());
 
+        // Увеличиваем значение в input'е
         $input.val(currentValue + 1);
 
-        // Запускаем функцию
+        // Запускаем функцию AJAX-обновления: новое количество, изменение = 1
         updateCart(cartID, currentValue + 1, 1, url);
     });
-    */
 
     // --- Обработчик оповещений Django ---
 
