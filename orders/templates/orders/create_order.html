@@ -85,6 +85,9 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="payment_on_get" id="payment_cash" value="1">
                                 <label class="form-check-label" for="payment_cash">Наличными/картой при получении</label>
+                                {% if form.payment_on_get.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.payment_on_get.errors}}</div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
