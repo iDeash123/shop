@@ -9,16 +9,16 @@ from goods.models import Categories, Products
 def index(request):
 
     context = {
-        "title": "SEAR - Головна",
-        "content": "Інтернет-магазин грилів SEAR",
+        "title": "VULCANO - Головна",
+        "content": "Інтернет-магазин грилів VULCANO",
     }
     return render(request, "main/index.html", context)
 
 
 def about(request):
     context = {
-        "title": "SEAR - Про нас",
-        "content": "Про магазин SEAR",
-        "text_on_page": "Текст сторінки про магазин грилів SEAR",
+        "title": "VULCANO - Про нас",
+        "content": "Про магазин VULCANO",
+        "text_on_page": "Текст сторінки про магазин грилів VULCANO",
     }
     return render(request, "main/about.html", context)

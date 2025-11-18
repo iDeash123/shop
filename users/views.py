@@ -33,7 +33,7 @@ def login(request):
                 return HttpResponseRedirect(reverse("main:index"))
     else:
         form = UserLoginForm()
-    context = {"title": "SEAR - Вхід", "form": form}
+    context = {"title": "VULCANO - Вхід", "form": form}
 
     return render(request, "users/login.html", context)
 
@@ -58,7 +58,7 @@ def registration(request):
         form = UserRegistrationForm()
 
     context = {
-        "title": "SEAR - Реєстрація",
+        "title": "VULCANO - Реєстрація",
         "form": form,
     }
     return render(request, "users/registration.html", context)
@@ -78,7 +78,7 @@ def profile(request):
         form = ProfileForm(instance=request.user)
 
     context = {
-        "title": "SEAR - Кабінет",
+        "title": "VULCANO - Кабінет",
         "form": form,
     }
     return render(request, "users/profile.html", context)
@@ -86,7 +86,7 @@ def profile(request):
 
 def users_cart(request):
     context = {
-        "title": "SEAR - Корзина",
+        "title": "VULCANO - Корзина",
     }
     return render(request, "users/users_cart.html", context)
 
