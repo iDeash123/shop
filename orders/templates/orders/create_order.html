@@ -30,7 +30,7 @@
                             value="{% if form.first_name %}{{ form.first_name.value }}{% endif %}"
                             name="first_name" required>
                             {% if form.first_name.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
                             {% endif %}
                         </div>
 
@@ -40,7 +40,7 @@
                             value="{% if form.last_name %}{{ form.last_name.value }}{% endif %}"
                             name="last_name" required>
                             {% if form.last_name.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
                             {% endif %}
                         </div>
 
@@ -50,7 +50,7 @@
                              value="{% if form.phone_number %}{{ form.phone_number.value }}{% endif %}"
                             placeholder="В формате: XXX-XXX-XX-XX" required>
                             {% if form.phone_number.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
                             {% endif %}
                         </div>
 
@@ -72,7 +72,7 @@
                              value="{% if form.delivery_address %}{{ form.delivery_address.value }}{% endif %}"
                             rows="2"></textarea>
                             {% if form.delivery_address.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.delivery_address.errors}}</div>
                             {% endif %}
                         </div>
 
