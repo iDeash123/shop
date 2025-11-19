@@ -20,6 +20,11 @@ def create_order(request):
                     cart_items = Cart.objects.filter(user=user)
 
                     if cart_items.exists():
+
+                        phone_number = form.cleaned_data["phone_number"]
+                        user.phone_number = phone_number
+                        user.save()
+
                         # Создать заказ
                         order = Order.objects.create(
                             user=user,
@@ -63,6 +68,7 @@ def create_order(request):
         initial = {
             "first_name": request.user.first_name,
             "last_name": request.user.last_name,
+            "phone_number": request.user.phone_number,
         }
 
         form = CreateOrderForm(initial=initial)
@@ -70,5 +76,6 @@ def create_order(request):
     context = {
         "title": "VULCANO - Оформление заказа",
         "form": form,
+        "is_create_order": True,
     }
     return render(request, "orders/create_order.html", context=context)
