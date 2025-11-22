@@ -52,6 +52,50 @@ class Products(models.Model):
         to=Categories, on_delete=models.CASCADE, verbose_name="Category"
     )
 
+    brand = models.CharField(
+        max_length=100, blank=True, null=True, verbose_name="Brand"
+    )
+    grilling_area_sq_inch = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name="Grilling Area (e.g. sq. in / cm²)",
+    )
+    power_kw = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        verbose_name="Power (kW/BTU)",
+    )
+    burner_count = models.PositiveSmallIntegerField(
+        default=0, verbose_name="Number of Burners"
+    )
+    body_material = models.CharField(
+        max_length=100, blank=True, null=True, verbose_name="Body Material"
+    )
+    color = models.CharField(max_length=50, default="Black", verbose_name="Color")
+    warranty_years = models.PositiveSmallIntegerField(
+        default=1, verbose_name="Warranty (Years)"
+    )
+
+    weight_kg = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        verbose_name="Weight (kg)",
+    )
+    dimensions_cm = models.CharField(
+        max_length=100, blank=True, null=True, verbose_name="Dimensions (W x H x D cm)"
+    )
+
+    has_thermometer = models.BooleanField(
+        default=False, verbose_name="Built-in Thermometer"
+    )
+    has_side_burner = models.BooleanField(default=False, verbose_name="Side Burner")
+    is_portable = models.BooleanField(default=False, verbose_name="Portable")
+
     class Meta:
         db_table = "product"
         verbose_name = "product"

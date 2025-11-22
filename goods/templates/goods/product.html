@@ -10,7 +10,6 @@
 <div class="container mt-5">
     <div class="card mb-4 custom-shadow">
         <div class="row">
-            <!-- Миниатюры -->
             <div class="col-md-4">
                 <img src="{{ product.image.url }}" alt="Изображение 1"
                     class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
@@ -18,7 +17,6 @@
             <div class="col-md-4 ">
                 <p class="product_id mt-3">id: {{ product.display_id }}</p>
             </div>
-            <!-- Увеличить изображение в модальном окне -->
             <div class="modal fade" id="imageModal1" tabindex="-1"
                 aria-labelledby="imageModal1Label" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -36,11 +34,100 @@
                 </div>
             </div>
         </div>
-        <!-- Описание товара -->
         <div class="card-body">
             <p class="card-text">Цена: <strong>{{ product.sell_price }} $</strong></p>
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description }}</p>
+
+            <h5 class="mt-4 mb-3">Характеристики</h5>
+            <table class="table table-bordered">
+                <tbody>
+                    {% if product.brand %}
+                    <tr>
+                        <th scope="row">Бренд</th>
+                        <td>{{ product.brand }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.grilling_area_sq_inch %}
+                    <tr>
+                        <th scope="row">Площадь приготовления</th>
+                        <td>{{ product.grilling_area_sq_inch }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.power_kw %}
+                    <tr>
+                        <th scope="row">Мощность</th>
+                        <td>{{ product.power_kw }} kW/BTU</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.burner_count %}
+                    <tr>
+                        <th scope="row">Количество горелок</th>
+                        <td>{{ product.burner_count }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.body_material %}
+                    <tr>
+                        <th scope="row">Материал корпуса</th>
+                        <td>{{ product.body_material }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.color %}
+                    <tr>
+                        <th scope="row">Цвет</th>
+                        <td>{{ product.color }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.warranty_years %}
+                    <tr>
+                        <th scope="row">Гарантия</th>
+                        <td>{{ product.warranty_years }} лет</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.weight_kg %}
+                    <tr>
+                        <th scope="row">Вес</th>
+                        <td>{{ product.weight_kg }} кг</td>
+                    </tr>
+                    {% endif %}
+                    {% if product.dimensions_cm %}
+                    <tr>
+                        <th scope="row">Размеры (ШxВxГ)</th>
+                        <td>{{ product.dimensions_cm }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th scope="row">Встроенный термометр</th>
+                        <td>
+                            {% if product.has_thermometer %}
+                                <span class="text-success">Есть</span>
+                            {% else %}
+                                <span class="text-danger">Нет</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Боковая горелка</th>
+                        <td>
+                            {% if product.has_side_burner %}
+                                <span class="text-success">Есть</span>
+                            {% else %}
+                                <span class="text-danger">Нет</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Портативность</th>
+                        <td>
+                            {% if product.is_portable %}
+                                <span class="text-success">Да</span>
+                            {% else %}
+                                <span class="text-danger">Нет</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <a href="{% url "cart:cart_add" %}" class="btn btn-dark add-to-cart"
             data-product-id="{{ product.id }}">
             Добавить в корзину</a>
